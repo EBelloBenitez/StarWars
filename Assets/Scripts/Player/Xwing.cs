@@ -23,6 +23,7 @@ public class Xwing : MonoBehaviour
     // Event methods
     private void Awake()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         shootAudio = GetComponent<AudioSource>();
     }
     
