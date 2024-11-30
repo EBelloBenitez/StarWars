@@ -9,18 +9,31 @@ public class Xwing : MonoBehaviour
     [SerializeField]
     private int speed,
                 turnSpeed;
+
+    [Header("Attack")]
+    [SerializeField]
+    private GameObject bulletPrefab;
+    [SerializeField]
+    private Transform[] posRotBullets;
+
+    // Private variables
+    private AudioSource shootAudio;
     
+    
+    // Event methods
     private void Awake()
     {
-        
+        shootAudio = GetComponent<AudioSource>();
     }
     
     private void Update()
     { 
         Movement();
         Turning();
+        Attack();   
     }
 
+    // Movement methods
     private void Movement()
     {
         // Determine direction of the motion
@@ -42,5 +55,20 @@ public class Xwing : MonoBehaviour
 
         // Rotate the x-wing
         transform.Rotate(turnSpeed * Time.deltaTime * direction);
+    }
+
+    // Attack methods
+    private void Attack()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            // Instantiate bullets and give them velocity
+            for (int i = 0; i < posRotBullets.Length; i++)
+            {
+                Instantiate(bulletPrefab, posRotBullets[i].position, posRotBullets[i].rotation);
+            }
+            // Play the shoot sound
+            shootAudio.Play();
+        }
     }
 }
