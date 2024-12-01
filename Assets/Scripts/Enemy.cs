@@ -20,11 +20,13 @@ public class Enemy : MonoBehaviour
     private float timeBetweenBullets;
 
     GameObject player;
+    AudioSource shootAudio;
 
     
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        shootAudio = GetComponent<AudioSource>();
         InvokeRepeating("Attack", 1, timeBetweenBullets);
     }
 
@@ -51,9 +53,11 @@ public class Enemy : MonoBehaviour
 
     private void Attack()
     {
+        shootAudio.Play();
         for (int i = 0; i < posRotBullet.Length; i++)
         {
             Instantiate(bulletPrefab, posRotBullet[i].position, posRotBullet[i].rotation);
         }
+        
     }
 }
