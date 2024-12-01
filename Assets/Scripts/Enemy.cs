@@ -17,6 +17,8 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private Transform[] posRotBullet;
     [SerializeField]
+    private float timeBetweenBurst;
+    [SerializeField]
     private float timeBetweenBullets;
 
     GameObject player;
@@ -27,7 +29,7 @@ public class Enemy : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         shootAudio = GetComponent<AudioSource>();
-        InvokeRepeating("Attack", 1, timeBetweenBullets);
+        InvokeRepeating("Burst", 1, timeBetweenBurst);
     }
 
     void Update()
@@ -48,6 +50,17 @@ public class Enemy : MonoBehaviour
         if (distanceToPlayer > minDistanceToPlayer)
         {
             transform.Translate(speed * Time.deltaTime * Vector3.forward);
+        }
+    }
+
+    private void Burst()
+    {
+        float delay = 0;
+        int numberOfBulltets = Random.Range(1, 4);
+        for (int i = 0; i < numberOfBulltets; i++)
+        {
+            Invoke("Attack", delay);
+            delay += timeBetweenBullets;
         }
     }
 
