@@ -1041,7 +1041,8 @@ MonoBehaviour:
   posRotBullet:
   - {fileID: 91603458}
   - {fileID: 143233539}
-  timeBetweenBurst: 1
+  minTimeBetweenBurst: 0.5
+  maxTimeBetweenBurst: 3
   timeBetweenBullets: 0.1
 --- !u!82 &1272807212
 AudioSource:
