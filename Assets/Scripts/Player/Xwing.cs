@@ -15,7 +15,7 @@ public class Xwing : MonoBehaviour
     private GameObject bulletPrefab;
     [SerializeField]
     private Transform[] posRotBullets;
-
+    
     // Private variables
     private AudioSource shootAudio;
     
